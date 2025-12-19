@@ -1,0 +1,243 @@
+﻿<Window x:Class="KemiK_0_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KemiK_0_3"
+        mc:Ignorable="d"
+        Title="KemiK" Height="900" Width="1600">
+    <Grid Background="Black">
+        <!-- Totalsetup -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Simulationsvisning -->
+        <Grid Background="Black" Grid.Column="0" Grid.Row="0" Panel.ZIndex="-1">
+            <Canvas Name="simulationsvisning"/>
+
+            <!-- Tid-Indput -->
+            <TextBox Name="TimeInputfield" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="20" Text="Time [s]" Margin="5,5,0,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Button Name="TimeInputfiledButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20" Content="Go" Margin="60,5,0,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="TimeInputfiledButton_Click"/>
+
+            <TextBlock Name="TimeDisplay" Text="Showing N/a ms of N/a ms Total" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="90,5,0,0" FontSize="12" Foreground="White" TextAlignment="Left"/>
+
+            <!-- DisplaySpeed -->
+            <Button Name="DisplaySpeedUpButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" Content="+" Margin="0,5,30,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DisplaySpeedUpButton_Click"/>
+            <Button Name="DisplaySpeedDownButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" Content="-" Margin="0,5,5,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="DisplaySpeedDownButton_Click"/>
+
+            <TextBlock Name="DisplaySpeedDisplay" Text="Display speed: N/a" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="120" Margin="0,5,55,0" FontSize="12" Foreground="White" TextAlignment="Left"/>
+
+            <!-- Pause -->
+            <TextBlock Text="Pause/resume" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="120" Margin="0,30,55,0" FontSize="12" Foreground="White" TextAlignment="Left"/>
+
+            <Button Name="PauseButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" Content="⏸️" Margin="0,30,30,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="PauseButton_Click"/>
+            <Button Name="ResumeButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" Height="20" Content="▶️" Margin="0,30,5,0" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="ResumeButton_Click"/>
+
+            <!-- DiplayTemp -->
+            <TextBlock Name="DisplayTemp" Text="Temp: N/a K" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="170" Margin="0,55,5,0" FontSize="12" Foreground="White" TextAlignment="Left"/>
+        </Grid>
+
+        <!-- Controlpanel -->
+        <Grid Background="Gray" Grid.Column="0" Grid.Row="1">
+            <TextBlock Text="(Vent til hver simulationsfase er færdig)" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="180" Margin="5,5,0,0" FontSize="10" Foreground="Black" TextAlignment="Left"/>
+            <Button Name="StartReaktionButton" Content="Start Reaktion" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="30" Margin="0,5,5,0" FontSize="12" Click="StartReaktionButton_Click"/>
+            <Button Name="ResetReaktionButton" Content="Reset Reaktion" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="30" Margin="0,5,110,0" FontSize="12" Click="ResetReaktionButton_Click"/>
+
+
+            <TextBlock Text="Control Panel" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="200" Margin="0,5,0,0" FontSize="20" Foreground="Black" TextAlignment="Center"/>
+            <TextBlock Text="Reaktion:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,60,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Bindingsenergi [J]:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,100,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Koncentrationer [mM]:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,140,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Aktiveringsenergi [J]:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,220,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Temperatur [K]:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,260,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Sansynlighed A+B til C+D:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="240" Margin="341,220,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Sansynlighed C+D til A+B:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="240" Margin="341,260,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Text="Approksimeret K:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="20,300,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+
+            <TextBlock Text="A      +      B      ⮂      C      +     D              X" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="400" Margin="255,60,0,0" FontSize="20" Foreground="Black" TextAlignment="Left"/>
+            <Ellipse Width="20" Height="20" Fill="Maroon" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="252,40,0,0"/>
+            <Ellipse Width="20" Height="20" Fill="Navy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="343,40,0,0"/>
+            <Ellipse Width="20" Height="20" Fill="DarkSeaGreen" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,40,0,0"/>
+            <Ellipse Width="20" Height="20" Fill="DarkOrange" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="526,40,0,0"/>
+            <Ellipse Width="20" Height="20" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="616,40,0,0"/>
+
+            <TextBlock Name="BindingsenergiA" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="246,105,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="BindingsenergiB" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="341,105,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="BindingsenergiC" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="436,105,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="BindingsenergiD" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="531,105,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+
+            <TextBlock Name="KoncA" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="246,145,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="KoncB" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="341,145,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="KoncC" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="436,145,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="KoncD" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="531,145,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="KoncX" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="626,145,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+
+            <TextBlock Name="AktiveringsenergiDisplay" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="246,225,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+            <TextBlock Name="TemperaturDisplay" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="246,265,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+
+            <TextBlock Name="SansylnighedABTilCD" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="626,225,0,0" FontSize="16" Foreground="Black" TextAlignment="Left" RenderTransformOrigin="0.957,0.721"/>
+            <TextBlock Name="SansylnighedCDTilAB" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="69" Margin="626,265,0,0" FontSize="16" Foreground="Black" TextAlignment="Left" RenderTransformOrigin="0.957,0.721"/>
+            <TextBlock Name="LigevægtskonstantDisplay" Text="N/a" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="335" Margin="246,305,0,0" FontSize="16" Foreground="Black" TextAlignment="Left"/>
+
+            <Button Name="BindingsenergiAOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,100,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiAOp_Click"/>
+            <Button Name="BindingsenergiANed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,120,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiANed_Click"/>
+            <Button Name="BindingsenergiBOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="320,100,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiBOp_Click"/>
+            <Button Name="BindingsenergiBNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="320,120,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiBNed_Click"/>
+            <Button Name="BindingsenergiCOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="415,100,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiCOp_Click"/>
+            <Button Name="BindingsenergiCNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="415,120,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiCNed_Click"/>
+            <Button Name="BindingsenergiDOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="510,100,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiDOp_Click"/>
+            <Button Name="BindingsenergiDNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="510,120,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="BindingsenergiDNed_Click"/>
+
+            <Button Name="TilføjA" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,140,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TilføjA_Click"/>
+            <Button Name="FjernA" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,160,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="FjernA_Click"/>
+            <Button Name="TilføjB" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="320,140,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TilføjB_Click"/>
+            <Button Name="FjernB" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="320,160,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="FjernB_Click"/>
+            <Button Name="TilføjC" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="415,140,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TilføjC_Click"/>
+            <Button Name="FjernC" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="415,160,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="FjernC_Click"/>
+            <Button Name="TilføjD" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="510,140,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TilføjD_Click"/>
+            <Button Name="FjernD" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="510,160,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="FjernD_Click"/>
+            <Button Name="TilføjX" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,140,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="TilføjX_Click"/>
+            <Button Name="FjernX" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,160,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="FjernX_Click"/>
+
+            <Button Name="AktiveringsenergiOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,220,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AktiveringsenergiOp_Click"/>
+            <Button Name="AktiveringsenergiNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,240,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AktiveringsenergiNed_Click"/>
+
+            <Button Name="TemperaturOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,260,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TemperaturOp_Click"/>
+            <Button Name="TemperaturNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="225,280,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="TemperaturNed_Click"/>
+
+            <Button Name="SansynlighedABTilCDOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,220,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SansynlighedABTilCDOp_Click"/>
+            <Button Name="SansynlighedABTilCDNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,240,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SansynlighedABTilCDNed_Click"/>
+
+            <Button Name="SansynlighedCDTilABOp" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,260,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SansynlighedCDTilABOp_Click"/>
+            <Button Name="SansynlighedCDTilABNed" Content="-" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="16" Margin="605,280,0,0" FontSize="7" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SansynlighedCDTilABNed_Click"/>
+        </Grid>
+
+        <!-- Statestik - Bestand -->
+        <Grid Background="Transparent" Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Temperatur Statestik labels -->
+            <TextBlock Name="KoncStatestikLabel" Text="Koncetration over Tid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" Margin="0,5,0,0" FontSize="14" Foreground="White" TextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+
+            <!-- Aksemærkater Tid (x-aksen) -->
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="0 s"   Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime0"/>
+                <TextBlock Text="N/a s" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime1"/>
+                <TextBlock Text="N/a s" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime2"/>
+                <TextBlock Text="N/a s" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime3"/>
+                <TextBlock Text="N/a s" Grid.Column="4" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime4"/>
+            </Grid>
+            <TextBlock Text="N/a s" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="KoncTime5"/>
+
+            <!-- Aksemærkater Konc (y-aksen) -->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="N/a M" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc1"/>
+                <TextBlock Text="N/a M" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc2"/>
+                <TextBlock Text="N/a M" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc3"/>
+                <TextBlock Text="N/a M" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc4"/>
+                <TextBlock Text="N/a M" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc5"/>
+            </Grid>
+            <TextBlock Text="N/a M" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Konc0"/>
+
+            <!-- Temperatur Statestik Canvas -->
+            <Canvas Name="KoncStatestikCanvas" Grid.Column="1" Grid.Row="1">
+                <Canvas.LayoutTransform>
+                    <ScaleTransform ScaleY="-1"/>
+                </Canvas.LayoutTransform>
+            </Canvas>
+
+
+        </Grid>
+
+        <!-- Statestik - Temparatur -->
+        <Grid Background="Transparent" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Temperatur Statestik labels -->
+            <TextBlock Name="TemperatureStatestikLabel" Text="Temperatur over Tid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" Margin="0,5,0,0" FontSize="14" Foreground="White" TextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+
+            <!-- Aksemærkater Tid (x-aksen) -->
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="0 s"   Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime0"/>
+                <TextBlock Text="N/a s" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime1"/>
+                <TextBlock Text="N/a s" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime2"/>
+                <TextBlock Text="N/a s" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime3"/>
+                <TextBlock Text="N/a s" Grid.Column="4" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime4"/>
+            </Grid>
+            <TextBlock Text="N/a s" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="10" Foreground="White" Name="TempTime5"/>
+
+            <!-- Aksemærkater Temp (y-aksen) -->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="N/a K" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp1"/>
+                <TextBlock Text="N/a K" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp2"/>
+                <TextBlock Text="N/a K" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp3"/>
+                <TextBlock Text="N/a K" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp4"/>
+                <TextBlock Text="N/a K" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp5"/>
+            </Grid>
+            <TextBlock Text="N/a K" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="10" Foreground="White" Name="Temp0"/>
+
+            <!-- Temperatur Statestik Canvas -->
+            <Canvas Name="TemperatureStatestikCanvas" Grid.Column="1" Grid.Row="1">
+                <Canvas.LayoutTransform>
+                    <ScaleTransform ScaleY="-1"/>
+                </Canvas.LayoutTransform>
+            </Canvas>
+
+
+        </Grid>
+    </Grid>
+</Window>
